@@ -55,7 +55,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Open+Sans&family=Raleway&display=swap" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="all.css" />
+    <jsp:include page="_styles.jsp"/>
 
     <style>
         #flashsale-jumbotron {

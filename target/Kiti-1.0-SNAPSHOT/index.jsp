@@ -56,7 +56,7 @@
           rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="all.css"/>
+    <jsp:include page="_styles.jsp" />
 </head>
 <body>
 
