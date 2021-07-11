@@ -10,6 +10,7 @@ public class VoucherController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("voucher.jsp").forward(request, response);
+        //TODO: Response all voucher in database
     }
 
     @Override

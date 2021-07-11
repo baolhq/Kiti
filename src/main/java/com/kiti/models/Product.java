@@ -2,16 +2,22 @@ package com.kiti.models;
 
 public class Product {
     private String name;
-    private int ratings;
+    private String description;
+    private int ratings, id;
     private float originalPrice, newPrice;
     private boolean isSale;
 
-    public Product(String name, int ratings, float originalPrice, float newPrice, boolean isSale) {
+    public Product(String name, String description, int ratings, float originalPrice, float newPrice, boolean isSale) {
         this.name = name;
+        this.description = description;
         this.ratings = ratings;
         this.originalPrice = originalPrice;
         this.newPrice = newPrice;
         this.isSale = isSale;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {
@@ -52,5 +58,13 @@ public class Product {
 
     public void setSale(boolean sale) {
         isSale = sale;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

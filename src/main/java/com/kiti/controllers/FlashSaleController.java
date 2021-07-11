@@ -10,6 +10,7 @@ public class FlashSaleController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("flashsale.jsp").forward(request, response);
+        //TODO: Get all products that are in sale
     }
 
     @Override
