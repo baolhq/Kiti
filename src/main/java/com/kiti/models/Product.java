@@ -6,7 +6,7 @@ public class Product {
     private String name;
     private String description;
     private String photoURL; // Ex: https://example.com/image.jpg
-    private ArrayList<String> tags; // "Jewelry, Sneaker, Clothes"
+    private ArrayList<String> tags; // "Jewelry, Sneaker, Clothes, etc.."
     private int rating, id;
     private double price;
     private float salePercent;
