@@ -3,21 +3,30 @@ package com.kiti.models;
 public class Product {
     private String name;
     private String description;
-    private int ratings, id;
-    private float originalPrice, newPrice;
-    private boolean isSale;
+    private String photoURL;
+    private int rating, id;
+    private double price;
+    private float salePercent;
 
-    public Product(String name, String description, int ratings, float originalPrice, float newPrice, boolean isSale) {
+    public Product(String name, String description, String photoURL, int rating, double price, float salePercent) {
         this.name = name;
         this.description = description;
-        this.ratings = ratings;
-        this.originalPrice = originalPrice;
-        this.newPrice = newPrice;
-        this.isSale = isSale;
+        this.photoURL = photoURL;
+        this.rating = rating;
+        this.price = price;
+        this.salePercent = salePercent;
     }
 
     public int getId() {
         return id;
+    }
+
+    public String getPhotoURL() {
+        return photoURL;
+    }
+
+    public void setPhotoURL(String photoURL) {
+        this.photoURL = photoURL;
     }
 
     public String getName() {
@@ -28,36 +37,20 @@ public class Product {
         this.name = name;
     }
 
-    public int getRatings() {
-        return ratings;
+    public int getRating() {
+        return rating;
     }
 
-    public void setRatings(int ratings) {
-        this.ratings = ratings;
+    public void setRating(int rating) {
+        this.rating = rating;
     }
 
-    public float getOriginalPrice() {
-        return originalPrice;
+    public double getPrice() {
+        return price;
     }
 
-    public void setOriginalPrice(float originalPrice) {
-        this.originalPrice = originalPrice;
-    }
-
-    public float getNewPrice() {
-        return newPrice;
-    }
-
-    public void setNewPrice(float newPrice) {
-        this.newPrice = newPrice;
-    }
-
-    public boolean isSale() {
-        return isSale;
-    }
-
-    public void setSale(boolean sale) {
-        isSale = sale;
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public String getDescription() {
@@ -66,5 +59,13 @@ public class Product {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public float getSalePercent() {
+        return salePercent;
+    }
+
+    public void setSalePercent(float salePercent) {
+        this.salePercent = salePercent;
     }
 }

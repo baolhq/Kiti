@@ -3,6 +3,7 @@ package com.kiti.models;
 public class User {
     private int id;
     private String fullName, username, password, address, phoneNumber;
+    private boolean isAdmin = false;
 
     public User(String fullName, String username, String password, String address, String phoneNumber) {
         this.fullName = fullName;
@@ -14,6 +15,14 @@ public class User {
 
     public int getId() {
         return id;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
     }
 
     public String getFullName() {
