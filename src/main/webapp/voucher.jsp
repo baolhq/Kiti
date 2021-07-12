@@ -1,20 +1,6 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.kiti.models.Product" %>
 
-<!-- In memory data for testing purpose only -->
-<%
-    ArrayList<Product> products = new ArrayList<>();
-    products.add(new Product("Fancy Product", "", 5, 40, 80, false));
-    products.add(new Product("Special Item", "", 4, 20, 18, true));
-    products.add(new Product("Sale Item", "", 3, 50, 25, true));
-    products.add(new Product("Popular Item", "", 4, 40, 40, false));
-    products.add(new Product("Sale Item", "", 4, 50, 25, true));
-    products.add(new Product("Fancy Product", "", 5, 40, 80, false));
-    products.add(new Product("Special Item", "", 4, 20, 18, true));
-    products.add(new Product("Fancy Product", "", 5, 40, 80, false));
-    products.add(new Product("Sale Item", "", 3, 50, 25, true));
-%>
-
 <%--
   Created by IntelliJ IDEA.
   User: Administrator

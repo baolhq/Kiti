@@ -4,15 +4,15 @@
 <!-- In memory data for testing purpose only -->
 <%
     ArrayList<Product> products = new ArrayList<>();
-    products.add(new Product("Fancy Product", "", 5, 40, 80, false));
-    products.add(new Product("Special Item", "", 4, 20, 18, true));
-    products.add(new Product("Sale Item", "", 3, 50, 25, true));
-    products.add(new Product("Popular Item", "", 4, 40, 40, false));
-    products.add(new Product("Sale Item", "", 4, 50, 25, true));
-    products.add(new Product("Fancy Product", "", 5, 40, 80, false));
-    products.add(new Product("Special Item", "", 4, 20, 18, true));
-    products.add(new Product("Fancy Product", "", 5, 40, 80, false));
-    products.add(new Product("Sale Item", "", 3, 50, 25, true));
+    products.add(new Product("Fancy Product", "", "", 4, 80, 0));
+    products.add(new Product("Special Item", "", "", 4, 18, 10));
+    products.add(new Product("Sale Item", "", "", 5, 25, 2.2f));
+    products.add(new Product("Popular Item", "", "", 4, 40, 5));
+    products.add(new Product("Sale Item", "", "", 5, 25, 5));
+    products.add(new Product("Fancy Product", "", "", 4, 80, 20));
+    products.add(new Product("Special Item", "", "", 3, 18, 12));
+    products.add(new Product("Fancy Product", "", "", 4, 80, 7));
+    products.add(new Product("Sale Item", "", "", 5, 25, 10));
 %>
 
 <%--
@@ -174,7 +174,7 @@
             <div class="col-sm-4 mb-5">
                 <div class="card h-100">
                     <%
-                        if (product.isSale()) {
+                        if (product.getSalePercent() > 0) {
                     %>
                     <!-- Sale badge-->
                     <div
@@ -203,7 +203,7 @@
                                     class="d-flex justify-content-center small text-warning mb-2"
                             >
                                 <%
-                                    for (int i = 0; i < product.getRatings(); i++) {
+                                    for (int i = 0; i < product.getRating(); i++) {
                                 %>
                                 <i class="fas fa-star"></i>
                                 <%
@@ -211,7 +211,7 @@
                                 %>
                             </div>
                             <!-- Product price-->
-                            $<%= product.getOriginalPrice() %> - $<%= product.getNewPrice() %>
+                            $<%= product.getPrice() %> - $<%= product.getPrice() - (product.getPrice() * product.getSalePercent() / 100) %>
                         </div>
                     </div>
                     <!-- Product actions-->
