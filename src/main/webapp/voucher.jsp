@@ -1,5 +1,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.kiti.models.Product" %>
+<%@ page import="java.sql.ResultSet" %>
+<%@ page import="com.kiti.daos.VoucherDAO" %>
 
 <%--
   Created by IntelliJ IDEA.
@@ -141,7 +143,27 @@
         <a href="#" class="btn py-2">
             <i class="fas fa-globe-asia"></i>
         </a>
+
+        <%
+            String username = null;
+
+            try {
+                username = request.getSession().getAttribute("username").toString();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+
+            if (username != null) {
+        %>
+        <a class="btn text-muted py-2" href="#"><%= username %></a>
+        <a href="<%= request.getContextPath() + "/Logout" %>" class="btn text-muted py-2">Logout</a>
+        <%
+        } else {
+        %>
         <a class="btn text-muted py-2" href="${pageContext.request.contextPath}/Login">Login</a>
+        <%
+            }
+        %>
     </div>
 </nav>
 
@@ -160,32 +182,11 @@
         <div class="col-lg-12 mx-auto">
             <!-- List group-->
             <ul class="list-group shadow">
-                <!-- list group item-->
-                <li class="list-group-item">
-                    <!-- Custom content-->
-                    <div
-                            class="media align-items-lg-center flex-column flex-lg-row p-3"
-                    >
-                        <div class="media-body order-2 order-lg-1">
-                            <h5 class="mt-0 font-weight-bold mb-2">Discount</h5>
-                            <p class="font-italic text-muted mb-0 small">Discount 30%</p>
-                            <div
-                                    class="d-flex align-items-center justify-content-between"
-                            >
-                                <h6 class="font-weight-bold my-2">5 Left</h6>
-                                <a href="" class="btn btn-outline-success disabled ml-5">
-                                    Added &nbsp;
-                                    <i class="fas fa-check-circle"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <span class="ml-lg-5 order-1 order-lg-2 voucher-code"
-                        >DC30</span
-                        >
-                    </div>
-                    <!-- End -->
-                </li>
-                <!-- End -->
+
+                <%
+                    ResultSet resultSet = VoucherDAO.getAllVouchers();
+                    while (resultSet.next()) {
+                %>
 
                 <!-- list group item-->
                 <li class="list-group-item">
@@ -194,82 +195,34 @@
                             class="media align-items-lg-center flex-column flex-lg-row p-3"
                     >
                         <div class="media-body order-2 order-lg-1">
-                            <h5 class="mt-0 font-weight-bold mb-2">Freeship</h5>
-                            <p class="font-italic text-muted mb-0 small">Freeship 20k</p>
+                            <h5 class="mt-0 font-weight-bold mb-2">
+                                <%= resultSet.getString(3) %>
+                            </h5>
                             <div
                                     class="d-flex align-items-center justify-content-between"
                             >
-                                <h6 class="font-weight-bold my-2">12 Left</h6>
-                                <a href="" class="btn btn-outline-success disabled ml-5">
-                                    Added &nbsp;
-                                    <i class="fas fa-check-circle"></i>
+                                <h6 class="font-weight-bold my-2">
+                                    <%= resultSet.getInt(1) %> Left
+                                </h6>
+                                <a href="#" class="btn btn-outline-dark ml-5">
+                                    Add
                                 </a>
                             </div>
                         </div>
                         <span class="ml-lg-5 order-1 order-lg-2 voucher-code"
-                        >FS20</span
+                        >
+                            <%= resultSet.getString(2) %>
+                        </span
                         >
                     </div>
                     <!-- End -->
                 </li>
                 <!-- End -->
 
-                <!-- list group item -->
-                <li class="list-group-item">
-                    <!-- Custom content-->
-                    <div
-                            class="media align-items-lg-center flex-column flex-lg-row p-3"
-                    >
-                        <div class="media-body order-2 order-lg-1">
-                            <h5 class="mt-0 font-weight-bold mb-2">Discount</h5>
-                            <p class="font-italic text-muted mb-0 small">
-                                Discount 50% for all jawelry products
-                            </p>
-                            <div
-                                    class="d-flex align-items-center justify-content-between"
-                            >
-                                <h6 class="font-weight-bold my-2">14 Left</h6>
-                                <a href="" class="btn btn-outline-secondary ml-5">
-                                    Add &nbsp;
-                                </a>
-                            </div>
-                        </div>
-                        <span class="ml-lg-5 order-1 order-lg-2 voucher-code"
-                        >DC50</span
-                        >
-                    </div>
-                    <!-- End -->
-                </li>
-                <!-- End -->
+                <%
+                    }
+                %>
 
-                <!-- list group item -->
-                <li class="list-group-item">
-                    <!-- Custom content-->
-                    <div
-                            class="media align-items-lg-center flex-column flex-lg-row p-3"
-                    >
-                        <div class="media-body order-2 order-lg-1">
-                            <h5 class="mt-0 font-weight-bold mb-2">Freeship Xtra</h5>
-                            <p class="font-italic text-muted mb-0 small">
-                                Freeship Extra
-                            </p>
-                            <div
-                                    class="d-flex align-items-center justify-content-between"
-                            >
-                                <h6 class="font-weight-bold my-2">22 Left</h6>
-                                <a href="" class="btn btn-outline-success disabled ml-5">
-                                    Added &nbsp;
-                                    <i class="fas fa-check-circle"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <span class="ml-lg-5 order-1 order-lg-2 voucher-code"
-                        >FX00</span
-                        >
-                    </div>
-                    <!-- End -->
-                </li>
-                <!-- End -->
             </ul>
             <!-- End -->
         </div>

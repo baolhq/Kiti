@@ -5,22 +5,28 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "HomeController", value = "/")
-public class HomeController extends HttpServlet {
+@WebServlet(name = "LogoutController", value = "/Logout")
+public class LogoutController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Cookie[] cookies = request.getCookies();
+        Object user = request.getSession().getAttribute("username");
+
+        if (user != null) {
+            request.getSession().invalidate();
+        }
 
         // Check if browser has cookie that contains username
+        Cookie[] cookies = request.getCookies();
         if (cookies.length > 0) {
             for (Cookie cookie: cookies) {
                 if (cookie.getName().equals("username")) {
-                    request.getSession().setAttribute("username", cookie.getValue());
+                    cookie.setMaxAge(0);
+                    response.addCookie(cookie);
                 }
             }
         }
 
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        response.sendRedirect(request.getContextPath() + "/");
     }
 
     @Override

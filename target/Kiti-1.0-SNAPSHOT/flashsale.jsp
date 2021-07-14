@@ -1,19 +1,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.kiti.models.Product" %>
-
-<!-- In memory data for testing purpose only -->
-<%
-    ArrayList<Product> products = new ArrayList<>();
-    products.add(new Product("Fancy Product", "", "", 4, 80, 0));
-    products.add(new Product("Special Item", "", "", 4, 18, 10));
-    products.add(new Product("Sale Item", "", "", 5, 25, 2.2f));
-    products.add(new Product("Popular Item", "", "", 4, 40, 5));
-    products.add(new Product("Sale Item", "", "", 5, 25, 5));
-    products.add(new Product("Fancy Product", "", "", 4, 80, 20));
-    products.add(new Product("Special Item", "", "", 3, 18, 12));
-    products.add(new Product("Fancy Product", "", "", 4, 80, 7));
-    products.add(new Product("Sale Item", "", "", 5, 25, 10));
-%>
+<%@ page import="java.sql.ResultSet" %>
+<%@ page import="com.kiti.daos.ProductDAO" %>
 
 <%--
   Created by IntelliJ IDEA.
@@ -149,7 +137,27 @@
             <a href="#" class="btn py-2">
                 <i class="fas fa-globe-asia"></i>
             </a>
+
+            <%
+                String username = null;
+
+                try {
+                    username = request.getSession().getAttribute("username").toString();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+
+                if (username != null) {
+            %>
+            <a class="btn text-muted py-2" href="#"><%= username %></a>
+            <a href="<%= request.getContextPath() + "/Logout" %>" class="btn text-muted py-2">Logout</a>
+            <%
+            } else {
+            %>
             <a class="btn text-muted py-2" href="${pageContext.request.contextPath}/Login">Login</a>
+            <%
+                }
+            %>
         </div>
     </nav>
 
@@ -167,15 +175,16 @@
                 </div>
             </div>
             <%
-                for (Product product: products) {
+                ResultSet resultSet = ProductDAO.getAllProducts();
+                while (resultSet.next()) {
+                    if (resultSet.getFloat(7) == 0) {
+                        continue;
+                    }
             %>
 
 
             <div class="col-sm-4 mb-5">
                 <div class="card h-100">
-                    <%
-                        if (product.getSalePercent() > 0) {
-                    %>
                     <!-- Sale badge-->
                     <div
                             class="badge bg-dark text-white position-absolute"
@@ -183,10 +192,6 @@
                     >
                         Sale
                     </div>
-
-                    <%
-                        }
-                    %>
                     <!-- Product image-->
                     <img
                             class="card-img-top"
@@ -197,13 +202,14 @@
                     <div class="card-body p-4">
                         <div class="text-center">
                             <!-- Product name-->
-                            <h5 class="fw-bolder"><%= product.getName() %></h5>
+                            <h5 class="fw-bolder"><%= resultSet.getString(2) %>
+                            </h5>
                             <!-- Product reviews-->
                             <div
                                     class="d-flex justify-content-center small text-warning mb-2"
                             >
                                 <%
-                                    for (int i = 0; i < product.getRatings(); i++) {
+                                    for (int i = 0; i < resultSet.getInt(5); i++) {
                                 %>
                                 <i class="fas fa-star"></i>
                                 <%
@@ -211,7 +217,17 @@
                                 %>
                             </div>
                             <!-- Product price-->
-                            $<%= product.getPrice() %> - $<%= product.getPrice() - (product.getPrice() * product.getSalePercent() / 100) %>
+                            <%
+                                if (resultSet.getFloat(7) > 0) {
+                            %>
+                            $<%= String.format("%.2f",  (resultSet.getDouble(6) - (resultSet.getDouble(6) * resultSet.getFloat(7) / 100)) / 10000) %> - $<%= resultSet.getDouble(6) / 10000 %>
+                            <%
+                            } else {
+                            %>
+                            $<%= resultSet.getDouble(6) / 10000 %>
+                            <%
+                                }
+                            %>
                         </div>
                     </div>
                     <!-- Product actions-->

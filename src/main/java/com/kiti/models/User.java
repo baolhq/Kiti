@@ -13,6 +13,10 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
+    public User(String username) {
+        this.username = username;
+    }
+
     public int getId() {
         return id;
     }

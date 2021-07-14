@@ -143,7 +143,27 @@
         <a href="#" class="btn py-2">
             <i class="fas fa-globe-asia"></i>
         </a>
-        <a class="btn text-muted py-2 active" href="${pageContext.request.contextPath}/Login">Login</a>
+
+        <%
+            String username = null;
+
+            try {
+                username = request.getSession().getAttribute("username").toString();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+
+            if (username != null) {
+        %>
+            <a class="btn text-muted py-2" href="#"><%= username %></a>
+            <a href="<%= request.getContextPath() + "/Logout" %>" class="btn text-muted py-2">Logout</a>
+        <%
+        } else {
+        %>
+        <a class="btn text-muted py-2" href="${pageContext.request.contextPath}/Login">Login</a>
+        <%
+            }
+        %>
     </div>
 </nav>
 
@@ -153,13 +173,13 @@
     <div class="row">
         <div class="col-md-6 login-form-1">
             <h3>Login</h3>
-            <form>
+            <form action="${pageContext.request.contextPath}/Login" method="POST">
                 <div class="form-group">
                     <input
                             type="text"
                             class="form-control"
-                            placeholder="Your Email (*)"
-                            value=""
+                            placeholder="Your username (*)"
+                            name="username"
                             required
                     />
                 </div>
@@ -167,8 +187,8 @@
                     <input
                             type="password"
                             class="form-control"
-                            placeholder="Your Password (*)"
-                            value=""
+                            placeholder="Your password (*)"
+                            name="password"
                             required
                     />
                 </div>
@@ -177,7 +197,7 @@
                             class="form-control text-center"
                             style="border: none !important"
                     >
-                        <input class="" type="checkbox" name="" id="remember" />
+                        <input class="" type="checkbox" name="remember" id="remember" />
                         <label for="remember">Remember me</label>
                     </div>
                 </div>
@@ -202,8 +222,8 @@
                     <input
                             type="text"
                             class="form-control"
-                            placeholder="Your Email (*)"
-                            value=""
+                            placeholder="Your username (*)"
+                            name="username"
                             required
                     />
                 </div>
@@ -211,8 +231,8 @@
                     <input
                             type="password"
                             class="form-control"
-                            placeholder="Your Password (*)"
-                            value=""
+                            placeholder="Your password (*)"
+                            name="password"
                             required
                     />
                 </div>
@@ -220,8 +240,7 @@
                     <input
                             type="password"
                             class="form-control"
-                            placeholder="Confirm Password (*)"
-                            value=""
+                            placeholder="Confirm password (*)"
                             required
                     />
                 </div>
@@ -233,7 +252,7 @@
                     />
                 </div>
                 <div class="form-group text-center">
-                    <a href="#" class="text-reset" value="Login">Need help?</a>
+                    <a href="#" class="text-reset">Need help?</a>
                 </div>
             </form>
         </div>
