@@ -127,9 +127,9 @@
                     </div>
                 </div>
             </form>
-            <a class="btn py-2 ml-2" href="cart.jsp">
+            <a class="btn py-2 ml-2" href="${pageContext.request.contextPath}/Cart">
                 <i class="fas fa-shopping-cart"></i>
-                <span class="cart-count">3</span>
+                <span class="cart-count">0</span>
             </a>
             <a href="#" class="btn py-2">
                 <i class="fas fa-adjust"></i>
@@ -192,12 +192,16 @@
                     >
                         Sale
                     </div>
-                    <!-- Product image-->
-                    <img
-                            class="card-img-top"
-                            src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
-                            alt="..."
-                    />
+                    <div class="portrait" style="height: 300px; width: 325px; border-bottom: 1px solid gray;
+display: flex; align-items: center">
+                        <!-- Product image-->
+                        <img
+                                class="card-img-top"
+                                src=<%= resultSet.getString(4) %>
+                                        alt="..."
+                                style="max-width: 100%; max-height: 100%; transform: scale(.8)"
+                        />
+                    </div>
                     <!-- Product details-->
                     <div class="card-body p-4">
                         <div class="text-center">
@@ -233,8 +237,8 @@
                     <!-- Product actions-->
                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                         <div class="text-center">
-                            <a class="btn btn-outline-dark mt-auto" href="#"
-                            >View options</a
+                            <a class="btn btn-outline-dark mt-auto add-btn" href="#"
+                            >Add to cart</a
                             >
                         </div>
                     </div>
@@ -426,8 +430,26 @@
                 document.getElementById("countdown").innerHTML = "EXPIRED";
             }
         }, 1000);
-    </script>
 
-    <script src="../scripts/all.js" defer></script>
+        $(".add-btn").click(function (e) {
+            e.preventDefault();
+            $(this).blur();
+            $(this).fadeOut(200, function () {
+                $(this).html(`Added <i class="fas fa-check"></i>`).fadeIn();
+                $(this).addClass("text-success");
+                $(".fa-shopping-cart").addClass("text-danger");
+                $(".cart-count")
+                    .html(parseInt($(".cart-count").html()) + 1)
+                    .fadeIn(500);
+            });
+            setTimeout(() => {
+                $(this).fadeOut(200, function () {
+                    $(this).html(`Add to cart`).fadeIn();
+                    $(this).removeClass("text-success");
+                    $(".fa-shopping-cart").removeClass("text-danger");
+                });
+            }, 2000);
+        });
+    </script>
 </body>
 </html>

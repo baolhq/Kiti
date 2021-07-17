@@ -133,7 +133,7 @@
                 </div>
             </div>
         </form>
-        <a class="btn py-2 ml-2" href="cart.jsp">
+        <a class="btn py-2 ml-2" href="${pageContext.request.contextPath}/Cart">
             <i class="fas fa-shopping-cart"></i>
             <span class="cart-count">3</span>
         </a>
@@ -167,6 +167,24 @@
     </div>
 </nav>
 
+<%
+    String registerSuccess = null;
+    try {
+        registerSuccess = request.getAttribute("register-success").toString();
+    } catch (Exception ex) {
+        ex.printStackTrace();
+    }
+    if (registerSuccess != null) {
+        request.setAttribute("register-success", null);
+%>
+    <script>
+        $(document).ready(() => {
+            alert("Register successfully, please login")
+        })
+    </script>
+<%
+    }
+%>
 
 <!-- Login Body -->
 <div class="container login-container">
@@ -217,7 +235,7 @@
         </div>
         <div class="col-md-6 login-form-2">
             <h3>Register</h3>
-            <form>
+            <form action="${pageContext.request.contextPath}/Register" method="POST">
                 <div class="form-group">
                     <input
                             type="text"

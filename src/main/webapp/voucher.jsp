@@ -1,5 +1,3 @@
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="com.kiti.models.Product" %>
 <%@ page import="java.sql.ResultSet" %>
 <%@ page import="com.kiti.daos.VoucherDAO" %>
 
@@ -15,7 +13,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Kiti - Online Shopping</title>
+    <title>Vouchers - Kiti</title>
     <!-- Required meta tags -->
     <meta charset="utf-8"/>
     <meta
@@ -133,9 +131,9 @@
                 </div>
             </div>
         </form>
-        <a class="btn py-2 ml-2" href="cart.jsp">
+        <a class="btn py-2 ml-2" href="${pageContext.request.contextPath}/Cart">
             <i class="fas fa-shopping-cart"></i>
-            <span class="cart-count">3</span>
+            <span class="cart-count">0</span>
         </a>
         <a href="#" class="btn py-2">
             <i class="fas fa-adjust"></i>
@@ -204,7 +202,7 @@
                                 <h6 class="font-weight-bold my-2">
                                     <%= resultSet.getInt(1) %> Left
                                 </h6>
-                                <a href="#" class="btn btn-outline-dark ml-5">
+                                <a href="#" class="btn btn-outline-dark ml-5 add-btn">
                                     Add
                                 </a>
                             </div>
@@ -242,7 +240,24 @@
         crossorigin="anonymous"
 ></script>
 
-<script src="../scripts/all.js" defer></script>
+<script>
+    $(".add-btn").click(function (e) {
+        e.preventDefault();
+        $(this).blur();
+        $(this).fadeOut(200, function () {
+            $(this).html(`Added <i class="fas fa-check"></i>`).fadeIn();
+            $(this).addClass("text-success");
+            $(".fa-shopping-cart").addClass("text-danger");
+        });
+        setTimeout(() => {
+            $(this).fadeOut(200, function () {
+                $(this).html(`Add to cart`).fadeIn();
+                $(this).removeClass("text-success");
+                $(".fa-shopping-cart").removeClass("text-danger");
+            });
+        }, 2000);
+    });
+</script>
 
 <jsp:include page="_footer.jsp"/>
 </body>
