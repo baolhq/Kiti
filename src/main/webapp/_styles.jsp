@@ -15,6 +15,7 @@
     .contact-links a {
         font-size: 24px;
         width: 50px;
+        height: 50px;
         border-radius: 50%;
     }
 

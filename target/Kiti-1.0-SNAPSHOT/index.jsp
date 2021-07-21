@@ -226,7 +226,7 @@ display: flex; align-items: center">
                     <!-- Product actions-->
                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                         <div class="text-center">
-                            <a class="btn btn-outline-dark mt-auto add-btn" href="#"
+                            <a class="btn btn-outline-dark mt-auto add-btn" href="#" onclick="addToCart(<%= resultSet.getString(1) %>)"
                             >Add to card</a
                             >
                         </div>

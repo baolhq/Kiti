@@ -135,7 +135,7 @@
         </form>
         <a class="btn py-2 ml-2" href="${pageContext.request.contextPath}/Cart">
             <i class="fas fa-shopping-cart"></i>
-            <span class="cart-count">3</span>
+            <span class="cart-count">0</span>
         </a>
         <a href="#" class="btn py-2">
             <i class="fas fa-adjust"></i>

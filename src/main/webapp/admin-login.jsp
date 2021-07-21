@@ -1,13 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
+<%--
+  Created by IntelliJ IDEA.
+  User: Administrator
+  Date: 21/07/2021
+  Time: 9:10 AM
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
 <head>
-    <title>Login - Kiti</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
+    <title>Admin Login - Kiti</title>
 
     <!-- Bootstrap CSS -->
     <link
@@ -28,7 +29,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Open+Sans&family=Raleway&display=swap" rel="stylesheet">
 
-    <!-- Custom CSS -->
     <jsp:include page="_styles.jsp" />
     <style>
         .login-container {
@@ -155,8 +155,8 @@
 
             if (username != null) {
         %>
-            <a class="btn text-muted py-2" href="#"><%= username %></a>
-            <a href="<%= request.getContextPath() + "/Logout" %>" class="btn text-muted py-2">Logout</a>
+        <a class="btn text-muted py-2" href="#"><%= username %></a>
+        <a href="<%= request.getContextPath() + "/Logout" %>" class="btn text-muted py-2">Logout</a>
         <%
         } else {
         %>
@@ -167,31 +167,12 @@
     </div>
 </nav>
 
-<%
-    String registerSuccess = null;
-    try {
-        registerSuccess = request.getAttribute("register-success").toString();
-    } catch (Exception ex) {
-        ex.printStackTrace();
-    }
-    if (registerSuccess != null) {
-        request.setAttribute("register-success", null);
-%>
-    <script>
-        $(document).ready(() => {
-            alert("Register successfully, please login")
-        })
-    </script>
-<%
-    }
-%>
-
 <!-- Login Body -->
 <div class="container login-container">
-    <div class="row">
+    <div class="row justify-content-center">
         <div class="col-md-6 login-form-1">
-            <h3>Login</h3>
-            <form action="${pageContext.request.contextPath}/Login" method="POST">
+            <h3>Admin Login</h3>
+            <form action="${pageContext.request.contextPath}/Admin" method="POST">
                 <div class="form-group">
                     <input
                             type="text"
@@ -230,47 +211,6 @@
                     <a href="#" class="text-reset" style="border: none !important"
                     >Forget Password?</a
                     >
-                </div>
-            </form>
-        </div>
-        <div class="col-md-6 login-form-2">
-            <h3>Register</h3>
-            <form action="${pageContext.request.contextPath}/Register" method="POST">
-                <div class="form-group">
-                    <input
-                            type="text"
-                            class="form-control"
-                            placeholder="Your username (*)"
-                            name="username"
-                            required
-                    />
-                </div>
-                <div class="form-group">
-                    <input
-                            type="password"
-                            class="form-control"
-                            placeholder="Your password (*)"
-                            name="password"
-                            required
-                    />
-                </div>
-                <div class="form-group">
-                    <input
-                            type="password"
-                            class="form-control"
-                            placeholder="Confirm password (*)"
-                            required
-                    />
-                </div>
-                <div class="form-group">
-                    <input
-                            type="submit"
-                            class="btn btn-block btn-outline-secondary text-white"
-                            value="SIGN UP"
-                    />
-                </div>
-                <div class="form-group text-center">
-                    <a href="#" class="text-reset">Need help?</a>
                 </div>
             </form>
         </div>
